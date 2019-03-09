@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<title>Instascan</title>
+	<title>Code Scanner</title>
+	<link rel="stylesheet" href="styles/styles.css" />
 	<script type="text/javascript" src="./javascripts/instascan.min.js"></script>
   </head>
   <body>
-	<div id ="app">
-	<div class="preview-container">
-        <video id="preview"></video>
-     </div>
-    </div>
-	<div>
-		<section class="scans">
-          <h2>Scans</h2>
-            <li id ="scanned_info" :title="scan.content"></li>
-        </section>
-    </div>
-	<script>
-		var self = this;
-		self.scanner = new Instascan.Scanner(
-			{
-				video: document.getElementById('preview')
-			}
-		);
-		scanner.addListener('scan',function(content, image) {
-			<!--self.scans.unshift({ date: +(Date.now()), content: content });-->
-			<!--alert('Scanning:' + content); window.open(content, "_blank"); -->
-			document.getElementById("scanned_info").innerHTML = content;
-		});
-		Instascan.Camera.getCameras().then(cameras =>
-		{
-			if(cameras.length > 0){
-				self.scanner.start(cameras[0]);
-			}else {
-				console.error("No cameras found");
-			}
-		});
-	</Script>
+  <center> 
+		<div id ="app" class="app">
+			<form>
+				<fieldset><legend>Camera</legend>
+					<div id="preview-container" class="preview-container">
+						<video id="preview"></video>
+					 </div>
+				</fieldset>
+				<fieldset><legend>Scanned informations</legend>
+					<div id="scan-container" class="scan-container">
+						<section class="scans">
+							<label for="field6" > 
+								<textarea name="field6" class="textarea-field" id="scanned_info" :title="scan.content"></textarea>
+							</label>
+						</section>
+					</div>
+				</fieldset>
+			</form>
+		</div>
 
+
+
+		<script>
+			var self = this;
+			self.scanner = new Instascan.Scanner(
+				{
+					video: document.getElementById('preview')
+				}
+			);
+			scanner.addListener('scan',function(content, image) {
+				<!--self.scans.unshift({ date: +(Date.now()), content: content });-->
+				<!--alert('Scanning:' + content); window.open(content, "_blank"); -->
+				document.getElementById("scanned_info").innerHTML = content;
+			});
+			Instascan.Camera.getCameras().then(cameras =>
+			{
+				if(cameras.length > 0){
+					self.scanner.start(cameras[0]);
+				}else {
+					console.error("No cameras found");
+				}
+			});
+		</Script>
+	</center>
   </body>
 </html>
