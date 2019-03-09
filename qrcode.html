@@ -5,21 +5,23 @@
 	<script type="text/javascript" src="./javascripts/instascan.min.js"></script>
   </head>
   <body>
-	<video id="preview" width="320" height="240" autoplay> </video>
+	<video id="preview" > </video>
 	<script>
-		let scanner = new Instascan.Scanner(
+		var self = this;
+		self.scanner = new Instascan.Scanner(
 			{
 				video: document.getElementById('preview')
 			}
 		);
 		scanner.addListener('scan',function(content) {
-			alert('Scanning:' + content);
-			window.open(content, "_blank");
+			self.scans.unshift({ date: +(Date.now()), content: content });
+			<!'alert('Scanning:' + content);
+			window.open(content, "_blank"); -->
 		});
 		Instascan.Camera.getCameras().then(cameras =>
 		{
 			if(cameras.length > 0){
-				scanner.start(cameras[0]);
+				self.scanner.start(cameras[0]);
 			}else {
 				console.error("No cameras found");
 			}
