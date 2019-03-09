@@ -15,8 +15,7 @@
 		);
 		scanner.addListener('scan',function(content) {
 			self.scans.unshift({ date: +(Date.now()), content: content });
-			<!'alert('Scanning:' + content);
-			window.open(content, "_blank"); -->
+			<!--'alert('Scanning:' + content); window.open(content, "_blank"); -->
 		});
 		Instascan.Camera.getCameras().then(cameras =>
 		{
