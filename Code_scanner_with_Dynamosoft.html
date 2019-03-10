@@ -114,7 +114,7 @@
 
 				navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 250 }, height: { ideal: 250 }, facingMode: { ideal: 'environment' } } }).then((stream)=>{
 					//kConsoleLog('======get video========');
-					var video = document.getElementById("myVideo")[0];
+					var video = document.getElementById("preview");
 					video.srcObject = stream;
 					video.onloadedmetadata = ()=>{
 						//kConsoleLog('======play video========');
@@ -155,7 +155,7 @@
 				var timestart = (new Date()).getTime();
 
 				var reader = new dynamsoft.BarcodeReader();
-				reader.decodeFileInMemory(document.getElementById("myVideo")[0]).then(results=>{
+				reader.decodeFileInMemory(document.getElementById("preview")).then(results=>{
 					//kConsoleLog('time cost: ' + ((new Date()).getTime() - timestart) + 'ms');
 					for(var i=0;i<results.length;++i){
 						var result = results[i];
