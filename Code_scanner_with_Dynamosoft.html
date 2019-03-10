@@ -98,6 +98,8 @@
 				$('#divLoading').text('load dbr worker fail: '+(ex.message || ex));
 			};*/
 			
+			//https://www.dynamsoft.com/CustomerPortal/Portal/TrialLicense.aspx
+			dynamsoft.dbrEnv.licenseKey = "t0068NQAAAFe3OwXuX/n0PnY7TBXPEBQVZazBLrftAkj/3TU2rimDoLiYuAqmNAj0o7oH1otTITXVAJ3Nv2vLdsI2R9WrAHQ=";
 			dynamsoft = self.dynamsoft || {};
 			dynamsoft.dbrEnv = dynamsoft.dbrEnv || {};
 			dynamsoft.dbrEnv.onAutoLoadWasmSuccess = function(){
@@ -160,7 +162,7 @@
 					for(var i=0;i<results.length;++i){
 						var result = results[i];
 						//kConsoleLog(result.BarcodeText);
-						document.getElementById("scanned_info").innerHTML += result.BarcodeText;
+						document.getElementById("scanned_info").innerHTML = result.BarcodeText;
 					}
 					setTimeout(loopReadVideo, 0);
 					return reader.deleteInstance();
