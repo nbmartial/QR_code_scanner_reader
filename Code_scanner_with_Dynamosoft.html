@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+	<title>Code Scanner</title>
+	<link rel="stylesheet" href="styles/styles.css" />
+	<script type="text/javascript" src="./javascripts/dbr-6.4.1.3.min.js"></script>
+  </head>
+  <body>
+  <center> 
+		<div id ="app" class="app">
+			<form>
+				<div id="divLoadInfo">loading...</div>
+				<input id="uploadImage" type="file" accept="image/bmp,image/jpeg,image/png,image/gif">
+				
+				<fieldset><legend>Camera</legend>
+					<div id="preview-container" class="preview-container">
+						<video id="preview"></video>
+					 </div>
+				</fieldset>
+				<fieldset><legend>Scanned informations</legend>
+					<div id="scan-container" class="scan-container">
+						<section class="scans">
+							<label for="field6" > 
+								<textarea name="field6" class="textarea-field" id="scanned_info" :title="scan.content"></textarea>
+							</label>
+						</section>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		
+		<script>
+			dynamsoft = self.dynamsoft || {};
+			dynamsoft.dbrEnv = dynamsoft.dbrEnv || {};
+			dynamsoft.dbrEnv.onAutoLoadWasmSuccess = function(){
+			document.getElementById('divLoadInfo').innerHTML="load dbr wasm success.";
+			};
+			dynamsoft.dbrEnv.onAutoLoadWasmError = function(status){
+			document.getElementById('divLoadInfo').innerHTML="load wasm failed: "+status;
+			};
+		</script>
+
+		
+		<script>
+			document.getElementById('uploadImage').addEventListener('change', function(){
+				var file = this.files[0];
+				//blob to image
+				var objUrl = URL.createObjectURL(file);
+				var image = new Image();
+				image.src = objUrl;
+				image.onload = function(){//draw image to canvas
+					var cvs = document.createElement('canvas');
+					cvs.width = image.naturalWidth;
+					cvs.height = image.naturalHeight;
+					var ctx = cvs.getContext('2d');
+					ctx.drawImage(image, 0, 0);
+					URL.revokeObjectURL(objUrl);
+					//get Uint8ClampedArray from canvas
+					var data = ctx.getImageData(0,0,cvs.width,cvs.height).data;
+					//decodeBuffer(source, width, height, stride, enumImagePixelFormat)
+					var reader = new dynamsoft.BarcodeReader();
+					reader.decodeBuffer(data, cvs.width, cvs.height, cvs.width * 4,
+					dynamsoft.BarcodeReader.EnumImagePixelFormat.IPF_ARGB_8888
+					).then(results=>{
+						var txts = [];
+						for(let j=0;j<results.length;++j){
+							txts.push(results[j].BarcodeText);
+						} alert(txts.join("\n"));
+					}).catch(ex=>{
+						alert('decode fail: ' + (ex.message || ex));
+						throw ex;
+					});
+				};
+				image.onerror = function(){
+					alert("Can't convert the blob to image.");
+				};
+				this.value = '';
+			});
+		</script>
+	</center>
+  </body>
+</html>

@@ -5,6 +5,7 @@
 	<title>Code Scanner</title>
 	<link rel="stylesheet" href="styles/styles.css" />
 	<script type="text/javascript" src="./javascripts/instascan.min.js"></script>
+	<script type="application/x-javascript" src="http://api.bridgeit.mobi/bridgeit/bridgeit.js"></script>
   </head>
   <body>
   <center> 
@@ -24,12 +25,19 @@
 						</section>
 					</div>
 				</fieldset>
+				<a id='scanBtn' class="button"
+				 onclick="bridgeit.scan('scanBtn', 'onAffterCaptureScan');"> scan a code</a>
 			</form>
 		</div>
-
-
+		
+		
 
 		<script>
+			function onAffterCaptureScan {
+			var text = event.value;
+			document.getElementById("scanned_info").innerHTML = text;
+			}
+			
 			var self = this;
 			self.scanner = new Instascan.Scanner(
 				{
@@ -43,23 +51,23 @@
 			});
 			Instascan.Camera.getCameras().then(cameras =>
 			{
-				<!--if(cameras.length > 0){-->
-					<!--self.scanner.start(cameras[0]);-->
-				<!--}else {-->
-					<!--console.error("No cameras found");->
-				<!--}-->
-				if (cameras.length > 0) {
-					var selectedCam = cameras[0];
-					$.each(cameras, (i, c) => {
-						if (c.name.indexOf('back') != -1) {
-							selectedCam = c;
-							return false;
-						}
-					});
-					scanner.start(selectedCam);
-				} else {
-					console.error('No cameras found.');
+				if(cameras.length > 0){
+					<!--self.scanner.start(cameras[0]);
+				}else {
+					console.error("No cameras found");
 				}
+				<!--if (cameras.length > 0) {-->
+				<!--	var selectedCam = cameras[0];-->
+				<!--	$.each(cameras, (i, c) => {-->
+				<!--		if (c.name.indexOf('back') != -1) {-->
+				<!--			selectedCam = c;-->
+				<!--			return false;-->
+				<!--		}-->
+				<!--	});-->
+				<!--	scanner.start(selectedCam);-->
+				<!--} else {-->
+				<!--	console.error('No cameras found.');-->
+				<!--}-->
 			});
 		</Script>
 	</center>
