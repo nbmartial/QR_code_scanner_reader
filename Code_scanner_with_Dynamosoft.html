@@ -83,12 +83,12 @@
 			
 			dynamsoft.dbrEnv.onAutoLoadWasmSuccess = function(){
 				playvideo();
-				$('#divLoading').text('load dbr worker success');
+				document.getElementById('divLoadInfo').innerHTML= = 'load dbr worker success';
 				isLooping = true;
 				loopReadVideo();
 			};
 			dynamsoft.dbrEnv.onAutoLoadWasmError = function(ex){
-				kConsoleLog(ex);
+				//kConsoleLog(ex);
 				$('#divLoading').text('load dbr worker fail: '+(ex.message || ex));
 			};
 			/*
