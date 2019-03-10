@@ -67,7 +67,7 @@
 						var txts = [];
 						for(let j=0;j<results.length;++j){
 							txts.push(results[j].BarcodeText);
-						} alert(txts.join("\n"));
+						} document.getElementById("scanned_info").innerHTML = txts.join("\n");
 					}).catch(ex=>{
 						alert('decode fail: ' + (ex.message || ex));
 						throw ex;
