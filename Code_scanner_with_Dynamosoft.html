@@ -102,6 +102,7 @@
 			dynamsoft.dbrEnv.licenseKey = "t0068NQAAAFe3OwXuX/n0PnY7TBXPEBQVZazBLrftAkj/3TU2rimDoLiYuAqmNAj0o7oH1otTITXVAJ3Nv2vLdsI2R9WrAHQ=";
 			dynamsoft = self.dynamsoft || {};
 			dynamsoft.dbrEnv = dynamsoft.dbrEnv || {};
+			dynamsoft.dbrEnv.bUseWorker = true; //uncomment it to use worker
 			dynamsoft.dbrEnv.onAutoLoadWasmSuccess = function(){
 				document.getElementById('divLoadInfo').innerHTML="load dbr wasm success.";
 				playvideo();
