@@ -74,6 +74,7 @@
 			// By default, js will load `dbr-<version>.min.js` & `dbr-<version>.wasm` in the same folder as the context.
 			// `dbr-<version>.min.js` & `dbr-<version>.wasm` should always put in same folder.
 			// Modify this setting when you put `dbr-<version>.min.js` & `dbr-<version>.wasm` somewhere else.
+			/*
 			dynamsoft.dbrEnv.resourcesPath = 'https://demo.dynamsoft.com/dbr_wasm/js';
 
 			//https://www.dynamsoft.com/CustomerPortal/Portal/TrialLicense.aspx
@@ -90,8 +91,8 @@
 			dynamsoft.dbrEnv.onAutoLoadWasmError = function(ex){
 				//kConsoleLog(ex);
 				$('#divLoading').text('load dbr worker fail: '+(ex.message || ex));
-			};
-			/*
+			};*/
+			
 			dynamsoft = self.dynamsoft || {};
 			dynamsoft.dbrEnv = dynamsoft.dbrEnv || {};
 			dynamsoft.dbrEnv.onAutoLoadWasmSuccess = function(){
@@ -103,7 +104,7 @@
 			dynamsoft.dbrEnv.onAutoLoadWasmError = function(status){
 				document.getElementById('divLoadInfo').innerHTML="load wasm failed: "+status;
 			};
-			*/
+			
 			var playvideo = ()=>{
 
 				navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 250 }, height: { ideal: 250 }, facingMode: { ideal: 'environment' } } }).then((stream)=>{
