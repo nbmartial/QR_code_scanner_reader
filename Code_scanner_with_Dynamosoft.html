@@ -114,7 +114,7 @@
 			
 			var playvideo = ()=>{
 
-				navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 250 }, height: { ideal: 250 }, facingMode: { ideal: 'environment' } } }).then((stream)=>{
+				navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: { ideal: 'environment' } } }).then((stream)=>{
 					//kConsoleLog('======get video========');
 					var video = document.getElementById("preview");
 					video.srcObject = stream;
