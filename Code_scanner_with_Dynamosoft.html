@@ -114,7 +114,7 @@
 
 				navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 250 }, height: { ideal: 250 }, facingMode: { ideal: 'environment' } } }).then((stream)=>{
 					//kConsoleLog('======get video========');
-					var video = $('#preview')[0];
+					var video = document.getElementById("myVideo")[0];
 					video.srcObject = stream;
 					video.onloadedmetadata = ()=>{
 						//kConsoleLog('======play video========');
@@ -155,12 +155,12 @@
 				var timestart = (new Date()).getTime();
 
 				var reader = new dynamsoft.BarcodeReader();
-				reader.decodeFileInMemory($('#preview')[0]).then(results=>{
+				reader.decodeFileInMemory(document.getElementById("myVideo")[0]).then(results=>{
 					//kConsoleLog('time cost: ' + ((new Date()).getTime() - timestart) + 'ms');
 					for(var i=0;i<results.length;++i){
 						var result = results[i];
 						//kConsoleLog(result.BarcodeText);
-						$('#scanned_info').text += result.BarcodeText;
+						document.getElementById("scanned_info").innerHTML += result.BarcodeText;
 					}
 					setTimeout(loopReadVideo, 0);
 					return reader.deleteInstance();
