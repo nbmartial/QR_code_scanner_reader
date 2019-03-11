@@ -32,10 +32,6 @@
 		
 
 		<script>
-			/* function onAffterCaptureScan {
-			var text = event.value;
-			document.getElementById("scanned_info").innerHTML = text;
-			}*/
 			
 			var self = this;
 			self.scanner = new Instascan.Scanner(
@@ -44,49 +40,14 @@
 				}
 			);
 			scanner.addListener('scan',function(content, image) {
-				<!--self.scans.unshift({ date: +(Date.now()), content: content });-->
-				<!--alert('Scanning:' + content); window.open(content, "_blank"); -->
 				document.getElementById("scanned_info").innerHTML = content;
 			});
-			/*
-			var playvideo = ()=>{
 
-				navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: { ideal: 'environment' } } }).then((stream)=>{
-					//kConsoleLog('======get video========');
-					var video = document.getElementById("preview");
-					video.srcObject = stream;
-					video.onloadedmetadata = ()=>{
-						//kConsoleLog('======play video========');
-						video.play();
-						//kConsoleLog('======played video========');
-
-						//$('#btn-startReadVideo').removeAttr('disabled');
-					};
-				}).catch((ex)=>{
-					//kConsoleLog(ex);
-					alert(ex);
-					alert("Please make sure the camera is connected and the site is deployed in https: "+(ex.message || ex));
-				});
-			};
-			
-			var loopReadVideo = function(){
-				if(!isLooping){
-					return;
-				}
-				var timestart = (new Date()).getTime();
-				self.scanner.start(document.getElementById("preview"));
-				
-				}).catch(ex=>{
-					setTimeout(loopReadVideo, 0);
-				});
-			};
-			*/
 			Instascan.Camera.getCameras().then(cameras =>
 			{
 				if(cameras.length > 0){
-				alert(cameras.length);
 					if(cameras.length > 1){
-						self.scanner.start(cameras[0]);
+						self.scanner.start(cameras[1]);
 					}
 					else
 					{
@@ -96,18 +57,6 @@
 				}else {
 					console.error("No cameras found");
 				}
-				<!--if (cameras.length > 0) {-->
-				<!--	var selectedCam = cameras[0];-->
-				<!--	$.each(cameras, (i, c) => {-->
-				<!--		if (c.name.indexOf('back') != -1) {-->
-				<!--			selectedCam = c;-->
-				<!--			return false;-->
-				<!--		}-->
-				<!--	});-->
-				<!--	scanner.start(selectedCam);-->
-				<!--} else {-->
-				<!--	console.error('No cameras found.');-->
-				<!--}-->
 			});
 		</Script>
 	</center>
