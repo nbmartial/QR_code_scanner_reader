@@ -45,13 +45,15 @@
 			dynamsoft.dbrEnv = dynamsoft.dbrEnv || {};
 			dynamsoft.dbrEnv.bUseWorker = true; //uncomment it to use worker
 			dynamsoft.dbrEnv.onAutoLoadWasmSuccess = function(){
-				document.getElementById('divLoadInfo').innerHTML="load dbr wasm success.";
+				//document.getElementById('divLoadInfo').innerHTML="load dbr wasm success.";
+				alert("load dbr wasm success.");
 				playvideo();
 				isLooping = true;
 				loopReadVideo();
 			};
 			dynamsoft.dbrEnv.onAutoLoadWasmError = function(status){
-				document.getElementById('divLoadInfo').innerHTML="load wasm failed: "+status;
+				//document.getElementById('divLoadInfo').innerHTML="load wasm failed: "+status;
+				alert("load wasm failed: "+status);
 			};
 			
 			var playvideo = ()=>{
