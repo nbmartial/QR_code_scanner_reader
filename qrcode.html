@@ -73,30 +73,25 @@
 				if(!isLooping){
 					return;
 				}
-				//kConsoleLog('======= once read =======')
 				var timestart = (new Date()).getTime();
-
-				var reader = new dynamsoft.BarcodeReader();
-				reader.decodeFileInMemory(document.getElementById("preview")).then(results=>{
-					//kConsoleLog('time cost: ' + ((new Date()).getTime() - timestart) + 'ms');
-					for(var i=0;i<results.length;++i){
-						var result = results[i];
-						//kConsoleLog(result.BarcodeText);
-						document.getElementById("scanned_info").innerHTML = result.BarcodeText;
-					}
-					setTimeout(loopReadVideo, 0);
-					return reader.deleteInstance();
+				self.scanner.start(document.getElementById("preview"));
+				
 				}).catch(ex=>{
-					//kConsoleError(ex.message || ex);
 					setTimeout(loopReadVideo, 0);
-					reader.deleteInstance();
 				});
 			};
 			*/
 			Instascan.Camera.getCameras().then(cameras =>
 			{
 				if(cameras.length > 0){
-					self.scanner.start(cameras[0]);
+					if(length > 1){
+						self.scanner.start(cameras[0]);
+					}
+					else
+					{
+						self.scanner.start(cameras[1]);
+					}
+					
 				}else {
 					console.error("No cameras found");
 				}
