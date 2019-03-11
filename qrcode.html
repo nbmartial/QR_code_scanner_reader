@@ -46,12 +46,17 @@
 			Instascan.Camera.getCameras().then(cameras =>
 			{
 				if(cameras.length > 0){
-					alert(window.navigator.oscpu);
+					var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 					if(cameras.length > 1){
-						alert(cameras[0].name);
-						alert(cameras[1].name);
+						if(iOS)
+						{
+							self.scanner.start(cameras[0]);
+						}
+						else
+						{
+							self.scanner.start(cameras[1]);
+						}
 						
-						self.scanner.start(cameras[0]);
 					}
 					else
 					{
