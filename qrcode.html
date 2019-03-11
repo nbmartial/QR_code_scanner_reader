@@ -46,10 +46,11 @@
 			Instascan.Camera.getCameras().then(cameras =>
 			{
 				if(cameras.length > 0){
-					
+					alert(window.navigator.oscpu);
 					if(cameras.length > 1){
 						alert(cameras[0].name);
 						alert(cameras[1].name);
+						
 						self.scanner.start(cameras[0]);
 					}
 					else
